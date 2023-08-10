@@ -1,0 +1,17 @@
+body {
+  margin: 0;
+}
+
+.box {
+  width: 375px;
+  height: 200px;
+  background: linear-gradient(to right ,green ,orange, red);
+}
+
+.box2 {
+  margin-top: 10px;
+  width: 187.5px;
+  height: 200px;
+  border: 20px solid black;
+  background: linear-gradient(to right ,green ,orange, red);
+}
