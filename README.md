@@ -43,9 +43,9 @@ $$
 ```tsx
 (function () {
   function changeRootFont() {
-		const WIDTH = 375
-		const clientWidth = document.documentElement.clientWidth
-		document.documentElement.style.fontSize = `${clientWidth / WIDTH * 100}px`
+    const WIDTH = 375
+    const clientWidth = document.documentElement.clientWidth
+    document.documentElement.style.fontSize = `${clientWidth / WIDTH * 100}px`
     // document.documentElement.style.fontSize = `${clientWidth / 10}px`
   }
   changeRootFont()
@@ -63,9 +63,13 @@ $$
 
 ## viewport方案
 
-viewport就是Web内容可以被看见的窗口区域。
+viewport就是Web内容可以被看见的窗口区域。[MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Viewport_meta_tag) 
 
-它的宽度可以设置为定值，当然若这个值超过了设备宽度会导致横向滚动。
+可以不严谨地把它理解为一块有宽高的虚拟画布，先在画布上绘制内容，然后根据画布和缩放比显示在屏幕上。
+
+根据这个[帖子](https://webplatform.github.io/docs/tutorials/mobile_viewport/)和测试的结果，移动浏览器的默认行为应该是设置画布为`980px`和不会产生横向滚动的缩放比。
+
+它的宽度可以设置为定值，当然在1倍缩放比下，设置超过了设备宽度的值会导致横向滚动。
 
 viewport方案就是把viewport宽度固定为设计稿宽度，然后把缩放比调成设备宽度和设计稿宽度的比例。
 
@@ -79,8 +83,8 @@ viewport方案就是把viewport宽度固定为设计稿宽度，然后把缩放�
 ```jsx
 (function () {
   function adjustScale() {
-		const WIDTH = 375
-		let scale= screen.width/WIDTH
+    const WIDTH = 375
+    let scale= screen.width/WIDTH
     let content= `width=${WIDTH}, initial-scale=${scale}, maximum-scale=${scale}, minimum-scale=${scale}`
     let meta= document.querySelector('meta[name=viewport]')
     if(!meta) {
@@ -114,7 +118,7 @@ CSS有一些和viewport相关的单位，如果令viewport宽度为设备宽度�
 
 使用CSS的`calc()`或者Sass这样的预处理器，就可以把px转换成vw单位。
 
-```sass
+```scss
 :root {
   --ratio: calc(100vw/750);
 }
